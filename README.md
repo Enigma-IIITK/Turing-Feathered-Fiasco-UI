@@ -2,6 +2,10 @@
 
 The UI built in Python using PyGame which is to be used for the Apoorv Event hosted by Enigma Club of IIITK. Refer to the README file for further instructions and Rules. (Download the Zip File and start working on the model)
 
+## Background:
+
+Pebbles got carried away while playing and got stuck in a cavern full of icy pillars. Turing must go and save them, but the pillars are too high. Help Turing fly over the pillars and rescue Pebbles by building a model leveraging the power of AI/ML.
+
 ## Rules of the event:
 
 - The participants must submit their models by 21st March, 11:59 pm
