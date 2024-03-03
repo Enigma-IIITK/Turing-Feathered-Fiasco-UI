@@ -6,7 +6,7 @@ The UI built in Python using PyGame which is to be used for the Apoorv Event hos
 
 - The participants must submit their models by 21st March, 11:59 pm
 - The model size must not exceed 100 MB. (It includes the bird with the best gene and its respective config files)
-- UI Source code link: [https://github.com/jg-eno/Turing-Feathered-Fiasco-UI.git]
+- UI Source code link: [https://github.com/Enigma-IIITK/Turing-Feathered-Fiasco-UI.git]
 - The fitness of the model will be evaluated through a mechanism that will not be revealed. The model with the highest fitness score will be crowned the winner.
 
 ## Rules of the game:
