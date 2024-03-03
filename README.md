@@ -1,7 +1,7 @@
 # Turing-Feathered-Fiasco-UI
 The UI built in Python using PyGame which is to be used for the Apoorv Event hosted by Enigma Club of IIITK. Refer to the README file for further instructions and Rules. (Download the Zip File and start working on the model)
 
-Rules of the event:
+#Rules of the event:
 
 • The participants must submit their models by 21st March, 11:59 pm
 
@@ -11,7 +11,7 @@ Rules of the event:
 
 • The fitness of the model will be evaluated through a mechanism that will not be revealed. The model with the highest fitness score will be crowned the winner.
 
-Rules of the game:
+#Rules of the game:
 
 • The game is a modified version of the classic Flappy Bird game.
 
