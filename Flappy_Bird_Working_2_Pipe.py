@@ -3,6 +3,7 @@ import neat
 import os
 import random
 import math
+import pickle
 from time import sleep
 pygame.font.init()
 
@@ -11,6 +12,9 @@ WIN_HEIGHT = 700
 SCORE = 0
 
 image_folder = "Images"
+
+STAR = pygame.transform.scale(pygame.image.load(os.path.join(image_folder, "coin_try6 (1).png")), (82, 70))
+
 
 bird_image_path = os.path.join(image_folder, "Pebbles.png")
 Bird_Img = pygame.transform.scale2x(pygame.image.load(bird_image_path))
@@ -244,6 +248,13 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
                 run = False
                 pygame.quit()
                 quit()
+        
+        if SCORE > 0 :
+            with open("submission.pkl", "wb") as f:
+                print("!!!!!!!!!!!Saved!!!!!!!!!!")
+                pickle.dump(birds[0].gene, f)
+                f.close()
+            exit()
         
         pipe_index = 0
         if(len(birds) > 0):#If the bird passes the pipe we want to increase the pipe index   
