@@ -8,9 +8,7 @@ Pebbles got carried away while playing and got stuck in a cavern full of icy pil
 
 ## SetUp:
 
-Download the ZIP File and run the following command:
-
-pip install -r /path/to/requirements.txt
+Download the ZIP File and run the following command: `pip install -r /path/to/requirements.txt`
 
 ## Rules of the event:
 
