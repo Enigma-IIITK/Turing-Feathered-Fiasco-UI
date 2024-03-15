@@ -10,6 +10,7 @@ pygame.font.init()
 WIN_WID = 500
 WIN_HEIGHT = 700
 SCORE = 0
+IS_COLLECTED_COIN = None
 
 image_folder = "Images"
 STAR = pygame.transform.scale(pygame.image.load(os.path.join(image_folder, "coin_try6 (1).png")), (82, 70))
@@ -66,7 +67,7 @@ class Bird:
         self.tick_count = 0
 
     def jump(self):
-        self.vel = 8.5
+        self.vel = -6.5
         self.height = self.y
         self.tick_count = 0
 
@@ -218,8 +219,10 @@ def draw_window(win,birds,pipes,base):
 def Score_Boost(bird):
     global Star_x, Star_y
     if(math.floor(math.sqrt(math.pow(Star_x - bird.x,2) + math.pow(Star_y - bird.y,2))) <= 30):
+        IS_COLLECTED_COIN = True
         return True
     else:
+        IS_COLLECTED_COIN = True
         return False
 
 
@@ -228,6 +231,7 @@ def Score_Boost(bird):
 def main(genomes,config): #Fitness Function. Evaluates all birds
     global SCORE
     SCORE = 0
+    global IS_COLLECTED_COIN
     final_eval_fit = 0
     pygame.init()
     birds = []
@@ -276,7 +280,7 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             distance = math.sqrt((Star_x-bird.x)**2 + (Star_y-bird.y)**2)
             displacement_x = (Star_x-bird.x)
             displacement_y = (Star_y-bird.y)
-            output = nets[x].activate((bird.y,Star_y,displacement_x,displacement_y,abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].middle_up),abs(bird.y - pipes[pipe_index].middle_down), abs(bird.y - pipes[pipe_index].bottom)))
+            output = nets[x].activate((bird.y,Star_y,abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].middle_up),abs(bird.y - pipes[pipe_index].middle_down), abs(bird.y - pipes[pipe_index].bottom)))
             #What if we get 2 outputs fromn the same neuron based on the position of the bird   
             #print(output)
             
@@ -290,10 +294,8 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             #     bird.jumpdown(abs(Star_y-bird.y))
             if det == 0:
                 pass
-            elif det == 1:
-                bird.jumpup(abs(Star_y-bird.y))
             else:
-                bird.jumpdown(abs(Star_y-bird.y))
+                bird.jump()
 
             
 
@@ -322,8 +324,11 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
                     if Score_Boost(bird):
                         g.fitness += 20
                         SCORE += 1
+                    
                     else:
                         g.fitness -= 50
+                        return final_eval_fit
+                        pygame.quit()
 
 
                 pipes.append(Pipe(700))
@@ -340,7 +345,7 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
 
             pipe.move()
         base.move()
-        #draw_window(win, birds,pipes,base)
+        draw_window(win, birds,pipes,base)
 
 
 def run(config_path):
