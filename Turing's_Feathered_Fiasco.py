@@ -199,8 +199,15 @@ def draw_window(win,bird,pipes,base):
     bird.draw(win)
     pygame.display.update()
 
-
-
+#Use this function to export the best performing bird into a pickle file.
+'''def Export(gen):
+    global SCORE
+    if SCORE > Your_Condition :#Whenever you want to save the bird.
+        with open("submission.pkl", "wb") as f:
+            print("!!!!!!!!!!!Saved!!!!!!!!!!")
+            pickle.dump(gen, f)
+            f.close()
+            exit()'''
 
 
 def main(): 
