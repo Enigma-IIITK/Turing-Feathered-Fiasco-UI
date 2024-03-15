@@ -10,6 +10,7 @@ pygame.font.init()
 WIN_WID = 500
 WIN_HEIGHT = 700
 SCORE = 0
+IS_COLLECTED_COIN = None
 
 image_folder = "Images"
 STAR = pygame.transform.scale(pygame.image.load(os.path.join(image_folder, "coin_try6 (1).png")), (82, 70))
@@ -218,8 +219,10 @@ def draw_window(win,birds,pipes,base):
 def Score_Boost(bird):
     global Star_x, Star_y
     if(math.floor(math.sqrt(math.pow(Star_x - bird.x,2) + math.pow(Star_y - bird.y,2))) <= 30):
+        IS_COLLECTED_COIN = True
         return True
     else:
+        IS_COLLECTED_COIN = True
         return False
 
 
@@ -228,6 +231,7 @@ def Score_Boost(bird):
 def main(genomes,config): #Fitness Function. Evaluates all birds
     global SCORE
     SCORE = 0
+    global IS_COLLECTED_COIN
     final_eval_fit = 0
     pygame.init()
     birds = []
@@ -320,8 +324,11 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
                     if Score_Boost(bird):
                         g.fitness += 20
                         SCORE += 1
+                    
                     else:
                         g.fitness -= 50
+                        return final_eval_fit
+                        pygame.quit()
 
 
                 pipes.append(Pipe(700))
@@ -338,7 +345,7 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
 
             pipe.move()
         base.move()
-        #draw_window(win, birds,pipes,base)
+        draw_window(win, birds,pipes,base)
 
 
 def run(config_path):
