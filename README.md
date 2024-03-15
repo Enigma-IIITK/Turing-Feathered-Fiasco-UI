@@ -38,5 +38,14 @@ Download the ZIP File and run the following command: `pip install -r /path/to/re
 ## Format of Submission
 
 - 1 (.pkl) Pickle File which has the gene of the Best Bird.
+  Use this function to export the best performing bird into a pickle file. (Also availabe in the UI .py File)
+  `def Export(gen):
+    global SCORE
+    if SCORE > 40 :
+        with open("submission.pkl", "wb") as f:
+            print("!!!!!!!!!!!Saved!!!!!!!!!!")
+            pickle.dump(gen, f)
+            f.close()
+            exit()`
 - 1 (.py) Python File to load the data from the Pickle File and run the Bird (The UI along with the bot).
 - 1 (.txt) Config File to set up the Neural Network.
