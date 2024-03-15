@@ -6,6 +6,12 @@ The UI built in Python using PyGame which is to be used for the Apoorv Event hos
 
 Pebbles got carried away while playing and got stuck in a cavern full of icy pillars. Turing must go and save them, but the pillars are too high. Help Turing fly over the pillars and rescue Pebbles by building a model leveraging the power of AI/ML.
 
+## SetUp:
+
+Download the ZIP File and run the following command:
+
+pip install -r /path/to/requirements.txt
+
 ## Rules of the event:
 
 - The participants must submit their models by 21st March, 11:59 pm
