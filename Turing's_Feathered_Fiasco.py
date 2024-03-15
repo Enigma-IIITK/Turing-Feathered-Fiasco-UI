@@ -202,7 +202,7 @@ def draw_window(win,bird,pipes,base):
 #Use this function to export the best performing bird into a pickle file.
 '''def Export(gen):
     global SCORE
-    if SCORE > 40 :
+    if SCORE > Your_Condition :#Whenever you want to save the bird.
         with open("submission.pkl", "wb") as f:
             print("!!!!!!!!!!!Saved!!!!!!!!!!")
             pickle.dump(gen, f)
