@@ -54,18 +54,18 @@ class Bird:
         self.img_count = 0
         self.img = self.Img
 
-    def jumpup(self,dis):
-        self.vel = -dis #To make the bird move up
-        self.height = self.y
-        self.tick_count = 0 #A counter to know when the last jump was made. It is similar to the time required while jumping 
+    # def jumpup(self,dis):
+    #     self.vel = -dis #To make the bird move up
+    #     self.height = self.y
+    #     self.tick_count = 0 #A counter to know when the last jump was made. It is similar to the time required while jumping 
 
-    def jumpdown(self,dis):
-        self.vel = dis
-        self.height = self.y
-        self.tick_count = 0
+    # def jumpdown(self,dis):
+    #     self.vel = dis
+    #     self.height = self.y
+    #     self.tick_count = 0
 
     def jump(self):
-        self.vel = 8.5
+        self.vel = -6.5
         self.height = self.y
         self.tick_count = 0
 
@@ -249,12 +249,12 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
                 pygame.quit()
                 quit()
         
-        if SCORE > 0 :
-            with open("submission.pkl", "wb") as f:
-                print("!!!!!!!!!!!Saved!!!!!!!!!!")
-                pickle.dump(gen[0], f)
-                f.close()
-            exit()
+        # if SCORE > 10 :
+        #      with open("submission.pkl", "wb") as f:
+        #          print("!!!!!!!!!!!Saved!!!!!!!!!!")
+        #          pickle.dump(gen[0], f)
+        #          f.close()
+        #      exit()
         
         pipe_index = 0
         if(len(birds) > 0):#If the bird passes the pipe we want to increase the pipe index   
@@ -274,9 +274,9 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             distance = math.sqrt((Star_x-bird.x)**2 + (Star_y-bird.y)**2)
             displacement_x = (Star_x-bird.x)
             displacement_y = (Star_y-bird.y)
-            output = nets[x].activate((bird.y,Star_y,displacement_x,displacement_y,abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].middle_up),abs(bird.y - pipes[pipe_index].middle_down), abs(bird.y - pipes[pipe_index].bottom)))
+            output = nets[x].activate((bird.y,Star_y,abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].middle_up),abs(bird.y - pipes[pipe_index].middle_down), abs(bird.y - pipes[pipe_index].bottom)))
             #What if we get 2 outputs fromn the same neuron based on the position of the bird   
-            print(output)
+            #print(output)
             
             det = output.index(max(output[:3]))
             
@@ -286,12 +286,8 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             #     bird.jumpdown(abs(Star_y-bird.y))
             if det == 0:
                 pass
-            elif det == 1:
-                bird.jumpup(abs(Star_y-bird.y))
             else:
-                bird.jumpdown(abs(Star_y-bird.y))
-
-            
+                bird.jump()
 
             
         rem = []        
@@ -312,16 +308,21 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
 
             if add_pipe:
                 for g in gen:
-                    g.fitness += 20  #We motivate the bird to fly into the Hole
+                    g.fitness += 5  #We motivate the bird to fly into the Hole
                     print(Score_Boost(bird))
                     if Score_Boost(bird):
-                        g.fitness += 20
-                        SCORE += 1
+                        g.fitness += 10
+                        #SCORE += 1
                     else:
-                        g.fitness -= 50
+                        g.fitness -= 3
 
 
-                pipes.append(Pipe(700))
+                if(SCORE <= 12):
+                    pipes.append(Pipe(700))
+                elif(SCORE <= 24):
+                    pipes.append(Pipe(650))
+                else:
+                    pipes.append(Pipe(600))
                 add_pipe = False
             
             for r in rem:
