@@ -66,7 +66,7 @@ class Bird:
         self.tick_count = 0
 
     def jump(self):
-        self.vel = 8.5
+        self.vel = -6.5
         self.height = self.y
         self.tick_count = 0
 
@@ -276,7 +276,7 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             distance = math.sqrt((Star_x-bird.x)**2 + (Star_y-bird.y)**2)
             displacement_x = (Star_x-bird.x)
             displacement_y = (Star_y-bird.y)
-            output = nets[x].activate((bird.y,Star_y,displacement_x,displacement_y,abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].middle_up),abs(bird.y - pipes[pipe_index].middle_down), abs(bird.y - pipes[pipe_index].bottom)))
+            output = nets[x].activate((bird.y,Star_y,abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].middle_up),abs(bird.y - pipes[pipe_index].middle_down), abs(bird.y - pipes[pipe_index].bottom)))
             #What if we get 2 outputs fromn the same neuron based on the position of the bird   
             #print(output)
             
@@ -290,10 +290,8 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             #     bird.jumpdown(abs(Star_y-bird.y))
             if det == 0:
                 pass
-            elif det == 1:
-                bird.jumpup(abs(Star_y-bird.y))
             else:
-                bird.jumpdown(abs(Star_y-bird.y))
+                bird.jump()
 
             
 
