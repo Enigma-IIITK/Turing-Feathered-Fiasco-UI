@@ -199,7 +199,7 @@ def draw_window(win,bird,pipes,base):
     bird.draw(win)
     pygame.display.update()
 
-#Use this function to export the best gene into a pickle file.
+#Use this function to export the best performing bird into a pickle file.
 '''def Export(gen):
     global SCORE
     if SCORE > 40 :
