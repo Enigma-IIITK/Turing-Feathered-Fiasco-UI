@@ -222,8 +222,15 @@ def Score_Boost(bird):
         return False
 
 
-
-
+def Export(gen):
+    global SCORE
+    if SCORE > 40 :
+        with open("submission.pkl", "wb") as f:
+            print("!!!!!!!!!!!Saved!!!!!!!!!!")
+            pickle.dump(gen, f)
+            f.close()
+            exit()
+    
 def main(genomes,config): #Fitness Function. Evaluates all birds
     global SCORE
     SCORE = 0
@@ -253,12 +260,7 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
                 pygame.quit()
                 quit()
         
-        # if SCORE > 10 :
-        #      with open("submission.pkl", "wb") as f:
-        #          print("!!!!!!!!!!!Saved!!!!!!!!!!")
-        #          pickle.dump(gen[0], f)
-        #          f.close()
-        #      exit()
+        
         
         pipe_index = 0
         if(len(birds) > 0):#If the bird passes the pipe we want to increase the pipe index   
@@ -319,7 +321,8 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
                         g.fitness += 10
                         #SCORE += 1
                     else:
-                        g.fitness -= 3
+                        g.fitness -= 5
+                    Export(g)
 
 
                 if(SCORE <= 12):
