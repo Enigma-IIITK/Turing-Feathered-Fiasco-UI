@@ -49,5 +49,7 @@ Download the ZIP File and run the following command: `pip install -r /path/to/re
             f.close()
             exit()
   ```
+- Use bird.jump() to make the bird move up and down.
+- Use bird.move() to see the action of inverted gravity on the bird.  
 - 1 (.py) Python File to load the data from the Pickle File and run the Bird (The UI along with the bot).
 - 1 (.txt) Config File to set up the Neural Network.
