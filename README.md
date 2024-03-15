@@ -33,6 +33,6 @@ Pebbles got carried away while playing and got stuck in a cavern full of icy pil
 
 ## Format of Submission
 
-- 1 (.pkl) Pickle File which has the gene of the best bird.
-- 1 (.py) Python File to load the data from the PicKle File and run the Bird.
+- 1 (.pkl) Pickle File which has the gene of the Best Bird.
+- 1 (.py) Python File to load the data from the Pickle File and run the Bird.
 - 1 (.txt) Config File to set up the Neural Network.
