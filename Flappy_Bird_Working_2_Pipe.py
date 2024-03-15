@@ -252,7 +252,7 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
         if SCORE > 0 :
             with open("submission.pkl", "wb") as f:
                 print("!!!!!!!!!!!Saved!!!!!!!!!!")
-                pickle.dump(birds[0].gene, f)
+                pickle.dump(gen[0], f)
                 f.close()
             exit()
         
