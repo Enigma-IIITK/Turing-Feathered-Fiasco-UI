@@ -42,7 +42,7 @@ Download the ZIP File and run the following command: `pip install -r /path/to/re
   ```
   def Export(gen):
     global SCORE
-    if SCORE > 40 :
+    if SCORE > Your_Condition :#Whenever you want to save the bird.
         with open("submission.pkl", "wb") as f:
             print("!!!!!!!!!!!Saved!!!!!!!!!!")
             pickle.dump(gen, f)
