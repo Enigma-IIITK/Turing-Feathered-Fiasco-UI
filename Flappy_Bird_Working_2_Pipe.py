@@ -10,6 +10,7 @@ pygame.font.init()
 WIN_WID = 500
 WIN_HEIGHT = 700
 SCORE = 0
+COUNTER = 0
 
 image_folder = "Images"
 
@@ -122,7 +123,10 @@ class Pipe:
         self.PIPE_TOP = pygame.transform.flip(Pipe_Img, False, True) # Pipe that is flipped
         self.PIPE_MIDDLE = Blue_Pipe_Img
         self.PIPE_Bottom = Pipe_Img
-        self.r = random.choice(['up','down'])
+        global COUNTER
+        COUNTER += 1
+        #self.r = random.choice(['up','down'])
+        self.r = COUNTER % 2
             
         self.passed = False # If the bird has already passed the pipe
         self.set_height()
@@ -144,7 +148,7 @@ class Pipe:
         win.blit(self.PIPE_Bottom, (self.x,self.bottom))
         win.blit(self.PIPE_MIDDLE, (self.x,self.middle_up))
         Star_x = self.x
-        if(self.r == 'up'):
+        if(self.r == 1):
             Star_y = (self.middle_up - 100)
         else:
             Star_y = (self.bottom + self.middle_down - 60)//2
@@ -307,6 +311,7 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
                 rem.append(pipe)            
 
             if add_pipe:
+                SCORE+=1
                 for g in gen:
                     g.fitness += 5  #We motivate the bird to fly into the Hole
                     print(Score_Boost(bird))
