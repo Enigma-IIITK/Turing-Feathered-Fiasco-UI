@@ -7,6 +7,7 @@ import math
 from time import sleep
 pygame.font.init()
 
+COUNTER = 0
 WIN_WID = 500
 WIN_HEIGHT = 700
 SCORE = 0
@@ -89,7 +90,7 @@ class Bird:
         if(self.tilt > -90): #Tilt down
             self.tilt -= self.Rot_Vel
         
-        self.eval_fit =  (self.alive_time * 0.00043 + SCORE * 2.5) * 10
+        self.eval_fit =  (self.alive_time * 0.00043 + SCORE * 2.5) * 1.5
         return self.eval_fit
 
     def draw(self,win):
@@ -128,7 +129,11 @@ class Pipe:
         self.PIPE_TOP = pygame.transform.flip(Pipe_Img, False, True) # Pipe that is flipped
         self.PIPE_MIDDLE = Blue_Pipe_Img
         self.PIPE_Bottom = Pipe_Img
-        self.r = random.choice(['up','down'])
+        
+        global COUNTER
+        COUNTER += 1
+        #self.r = random.choice(['up','down'])
+        self.r = COUNTER % 2
             
         self.passed = False # If the bird has already passed the pipe
         self.set_height()
@@ -150,7 +155,7 @@ class Pipe:
         win.blit(self.PIPE_Bottom, (self.x,self.bottom))
         win.blit(self.PIPE_MIDDLE, (self.x,self.middle_up))
         Star_x = self.x
-        if(self.r == 'up'):
+        if(self.r == 1):
             Star_y = (self.middle_up - 100)
         else:
             Star_y = (self.bottom + self.middle_down - 60)//2
@@ -331,7 +336,12 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
                         pygame.quit()
 
 
-                pipes.append(Pipe(700))
+                if(SCORE <= 12):
+                    pipes.append(Pipe(700))
+                elif(SCORE <= 24):
+                    pipes.append(Pipe(650))
+                else:
+                    pipes.append(Pipe(600))
                 add_pipe = False
             
             for r in rem:
