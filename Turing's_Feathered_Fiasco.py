@@ -257,6 +257,7 @@ def main():
             pipes.remove(r)
 
         #bird.move() #Uncomment this statement to see the effect of inverted gravity on the bird.
+        #Use bird.jump() to make the bird move up and down.
         base.move()
         draw_window(win, bird, pipes, base)
 
