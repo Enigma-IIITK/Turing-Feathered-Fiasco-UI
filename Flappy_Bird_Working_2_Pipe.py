@@ -317,16 +317,19 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             if pipe.x + pipe.PIPE_TOP.get_width() < 0:
                 rem.append(pipe)            
 
-            if add_pipe:
-                SCORE+=1
+            if add_pipe:                
+                cnt = 0
                 for g in gen:
                     g.fitness += 5  #We motivate the bird to fly into the Hole
                     print(Score_Boost(bird))
                     if Score_Boost(bird):
                         g.fitness += 10
+                        cnt+= 1
                         #SCORE += 1
                     else:
                         g.fitness -= 5
+                if cnt:
+                    SCORE+=1
                     Export(g)
 
 
