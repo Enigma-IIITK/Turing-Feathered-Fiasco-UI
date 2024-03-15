@@ -249,12 +249,12 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
                 pygame.quit()
                 quit()
         
-        # if SCORE > 10 :
-        #      with open("submission.pkl", "wb") as f:
-        #          print("!!!!!!!!!!!Saved!!!!!!!!!!")
-        #          pickle.dump(gen[0], f)
-        #          f.close()
-        #      exit()
+        if SCORE > 10 :
+              with open("submission.pkl", "wb") as f:
+                  print("!!!!!!!!!!!Saved!!!!!!!!!!")
+                  pickle.dump(gen[0], f)
+                  f.close()
+              exit()
         
         pipe_index = 0
         if(len(birds) > 0):#If the bird passes the pipe we want to increase the pipe index   
