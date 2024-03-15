@@ -1,6 +1,7 @@
 import  pygame
 import neat
 import os
+import pickle
 import random
 import math
 from time import sleep
@@ -45,6 +46,7 @@ class Bird:
         self.y = y
         self.tilt = 0
         self.tick_count = 0
+        self.eval_fit = 0
         self.vel = 0
         self.height =  self.y
         self.img_count = 0
@@ -81,6 +83,9 @@ class Bird:
             
         if(self.tilt > -90): #Tilt down
             self.tilt -= self.Rot_Vel
+        
+        self.eval_fit = self.tick_count * 0.00043 + SCORE * 2.5 - Star_x 
+        print(self.eval_fit)
 
     def draw(self,win):
         self.img_count += 1
@@ -223,6 +228,9 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
     birds = []
     nets = []
     gen = []
+    with open("submission.pkl", "rb") as f:
+        genome = pickle.load(f)
+    genomes = [(1, genome)]
     #The indexes of all the 3 lists will point to the same bird
     for _,g in genomes:#We are traversing a tuple here
         net = neat.nn.FeedForwardNetwork.create(g,config)
