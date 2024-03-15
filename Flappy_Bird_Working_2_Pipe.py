@@ -267,18 +267,18 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             #What if we get 2 outputs fromn the same neuron based on the position of the bird   
             print(output)
             
-            #det = output.index(max(output[:3]))
+            det = output.index(max(output[:3]))
             
-            if output[0] > 0.9:
+            # if output[0] > 0.9:
+            #     bird.jumpup(abs(Star_y-bird.y))
+            # elif output[0] < 0.3:
+            #     bird.jumpdown(abs(Star_y-bird.y))
+            if det == 0:
+                pass
+            elif det == 1:
                 bird.jumpup(abs(Star_y-bird.y))
-            elif output[0] < 0.3:
+            else:
                 bird.jumpdown(abs(Star_y-bird.y))
-            # if det == 0:
-            #     pass
-            # elif det == 1:
-            #      bird.jumpup(abs(Star_y-bird.y))
-            # else:
-            #      bird.jumpdown(abs(Star_y-bird.y))
 
             
 
