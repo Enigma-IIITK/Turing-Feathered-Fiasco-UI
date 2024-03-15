@@ -12,6 +12,8 @@ WIN_HEIGHT = 700
 SCORE = 0
 
 image_folder = "Images"
+STAR = pygame.transform.scale(pygame.image.load(os.path.join(image_folder, "coin_try6 (1).png")), (82, 70))
+
 
 bird_image_path = os.path.join(image_folder, "Pebbles.png")
 Bird_Img = pygame.transform.scale2x(pygame.image.load(bird_image_path))
@@ -46,6 +48,7 @@ class Bird:
         self.y = y
         self.tilt = 0
         self.tick_count = 0
+        self.alive_time = 0
         self.eval_fit = 0
         self.vel = 0
         self.height =  self.y
@@ -69,6 +72,7 @@ class Bird:
 
     def move(self):
         self.tick_count += 1
+        self.alive_time += 1
         d = -(self.vel*self.tick_count + 1.5*self.tick_count**2) #No.of pixels we are moving upwards
 
         if(d >= 16): #Terminal Velocity
@@ -84,8 +88,8 @@ class Bird:
         if(self.tilt > -90): #Tilt down
             self.tilt -= self.Rot_Vel
         
-        self.eval_fit = self.tick_count * 0.00043 + SCORE * 2.5 - Star_x 
-        print(self.eval_fit)
+        self.eval_fit =  (self.alive_time * 0.00043 + SCORE * 2.5) * 10
+        return self.eval_fit
 
     def draw(self,win):
         self.img_count += 1
@@ -224,6 +228,7 @@ def Score_Boost(bird):
 def main(genomes,config): #Fitness Function. Evaluates all birds
     global SCORE
     SCORE = 0
+    final_eval_fit = 0
     pygame.init()
     birds = []
     nets = []
@@ -260,10 +265,10 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
         
         else:
             run = False
-            break
+            return final_eval_fit
         
         for x,bird in enumerate(birds):
-            bird.move() #Encouraging the bird to continue the game
+            final_eval_fit = bird.move() #Encouraging the bird to continue the game
             gen[x].fitness += 0.1 #It increases at a fast rate, so we set the increment low
             global Star_y,Star_x
             #Passing the bird position, top and bottom pillar position
@@ -273,20 +278,22 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             displacement_y = (Star_y-bird.y)
             output = nets[x].activate((bird.y,Star_y,displacement_x,displacement_y,abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].middle_up),abs(bird.y - pipes[pipe_index].middle_down), abs(bird.y - pipes[pipe_index].bottom)))
             #What if we get 2 outputs fromn the same neuron based on the position of the bird   
-            print(output)
+            #print(output)
             
             #det = output.index(max(output[:3]))
             
-            if output[0] > 0.9:
+            det = output.index(max(output[:3]))
+            
+            # if output[0] > 0.9:
+            #     bird.jumpup(abs(Star_y-bird.y))
+            # elif output[0] < 0.3:
+            #     bird.jumpdown(abs(Star_y-bird.y))
+            if det == 0:
+                pass
+            elif det == 1:
                 bird.jumpup(abs(Star_y-bird.y))
-            elif output[0] < 0.3:
+            else:
                 bird.jumpdown(abs(Star_y-bird.y))
-            # if det == 0:
-            #     pass
-            # elif det == 1:
-            #      bird.jumpup(abs(Star_y-bird.y))
-            # else:
-            #      bird.jumpdown(abs(Star_y-bird.y))
 
             
 
@@ -294,11 +301,12 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
         rem = []        
         for pipe in pipes:
             for x,bird in enumerate(birds):
-                if pipe.collide(bird):#We remove the bird which is not eligible from the network
+                if pipe.collide(bird):
                    gen[x].fitness -= 1
                    birds.pop(x)
                    nets.pop(x)
                    gen.pop(x)
+
 
                 if not pipe.passed and pipe.x < bird.x:
                     pipe.passed = True
@@ -332,8 +340,8 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
 
             pipe.move()
         base.move()
-        draw_window(win, birds,pipes,base)
-    
+        #draw_window(win, birds,pipes,base)
+
 
 def run(config_path):
     config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction, neat.DefaultSpeciesSet, neat.DefaultStagnation, config_path)
@@ -343,9 +351,10 @@ def run(config_path):
     stats = neat.StatisticsReporter()
     popu.add_reporter(stats)
 
-    winner = popu.run(main,200) #We could store this data into a pickle file so that we can use this parent in the forhtcoming processes
+    return main([], config)#We could store this data into a pickle file so that we can use this parent in the forhtcoming processes
 
 if __name__ == "__main__":
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir,"config.txt")
-    run(config_path)
+    print(f"The Final Eval Fitness Of this submission is : {run(config_path)}")
+    

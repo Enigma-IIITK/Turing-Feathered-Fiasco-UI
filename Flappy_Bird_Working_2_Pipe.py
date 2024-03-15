@@ -276,7 +276,7 @@ def main(genomes,config): #Fitness Function. Evaluates all birds
             displacement_y = (Star_y-bird.y)
             output = nets[x].activate((bird.y,Star_y,displacement_x,displacement_y,abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].middle_up),abs(bird.y - pipes[pipe_index].middle_down), abs(bird.y - pipes[pipe_index].bottom)))
             #What if we get 2 outputs fromn the same neuron based on the position of the bird   
-            print(output)
+            #print(output)
             
             det = output.index(max(output[:3]))
             
