@@ -10,12 +10,22 @@ WIN_WID = 500
 WIN_HEIGHT = 700
 SCORE = 0
 
-Bird_Img = pygame.transform.scale2x(pygame.image.load(os.path.join("Pebbles.png")))
-Pipe_Img = pygame.transform.scale2x(pygame.image.load(os.path.join("Blue Pipe.jpg")))
-Blue_Pipe_Img = pygame.transform.scale(pygame.image.load(os.path.join("Blue Pipe.jpg")),(100,170))
-Base_Img = pygame.transform.scale2x(pygame.image.load(os.path.join("Blue Base.png")))
-BG_Img = pygame.transform.scale2x(pygame.image.load(os.path.join("ICE BG.png")))
-STAR = pygame.transform.scale(pygame.image.load(os.path.join("coin_try6 (1).png")) , (82,70))
+image_folder = "Images"
+
+bird_image_path = os.path.join(image_folder, "Pebbles.png")
+Bird_Img = pygame.transform.scale2x(pygame.image.load(bird_image_path))
+
+pipe_image_path = os.path.join(image_folder, "Blue Pipe.jpg")
+Pipe_Img = pygame.transform.scale2x(pygame.image.load(pipe_image_path))
+
+base_image_path = os.path.join(image_folder, "Blue Base.png")
+Base_Img = pygame.transform.scale2x(pygame.image.load(base_image_path))
+
+bg_image_path = os.path.join(image_folder, "ICE BG.png")
+BG_Img = pygame.transform.scale2x(pygame.image.load(bg_image_path))
+
+Blue_Pipe_Img = pygame.transform.scale(pygame.image.load(os.path.join(image_folder, "Blue Pipe.jpg")), (100, 170))
+
 Star_x,Star_y = 0,0
 
 bird_img_scaled = pygame.transform.scale(Bird_Img, (Bird_Img.get_width() * 0.75, Bird_Img.get_height() * 0.75))
