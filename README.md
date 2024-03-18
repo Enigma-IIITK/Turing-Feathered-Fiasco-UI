@@ -52,6 +52,8 @@ Download the ZIP File and run the following command: `pip install -r /path/to/re
 - The frequency of the Pipes occurring will be increased by 8.33% after it crosses a score of 12 and by 16.67% after it crosses a score of 24.
 - Gravity will be inverted throughout the game.
 - There will be 2 holes in the pillars, each worth different points. The bird must learn to fly through the hole with the coin.
+- Use bird.jump() to make the bird move up and down.
+- Use bird.move() to see the action of inverted gravity on the bird
 
 ## Recommended frameworks
 
@@ -75,9 +77,7 @@ Download the ZIP File and run the following command: `pip install -r /path/to/re
             f.close()
             exit()
   ```
-- Use bird.jump() to make the bird move up and down.
-- Use bird.move() to see the action of inverted gravity on the bird.  
-- 1 (.py) Python File to load the data from the Pickle File and run the Bird (The UI along with the bot).
+- 1 (.py) Python File to load the data from the Pickle File and run the Bird (Your Source Code).
 - 1 (.txt) Config File to set up the Neural Network.
 
 - all submissions should be made through this google form https://forms.gle/Z6X1VeKAmRgUKU4F8
