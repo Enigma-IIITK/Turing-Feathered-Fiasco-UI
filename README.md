@@ -77,7 +77,8 @@ Download the ZIP File and run the following command: `pip install -r /path/to/re
             f.close()
             exit()
   ```
-- 1 (.py) Python File to load the data from the Pickle File and run the Bird (Your Source Code).
+- 1 (.py) Python File to load the data from the Pickle File and run the Bird (Your Source Code : The UI Code provided by us  + Your model).
+  Reference : https://github.com/jg-eno/Flappy-Bird-using-NEAT-AI
 - 1 (.txt) Config File to set up the Neural Network.
 
 - all submissions should be made through this google form https://forms.gle/Z6X1VeKAmRgUKU4F8
