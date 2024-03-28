@@ -132,8 +132,8 @@ class Pipe:
         
         global COUNTER
         COUNTER += 1
-        #self.r = random.choice(['up','down'])
-        self.r = COUNTER % 2
+        self.r = random.choice(['up','down'])
+        #self.r = COUNTER % 2
             
         self.passed = False # If the bird has already passed the pipe
         self.set_height()
@@ -155,7 +155,7 @@ class Pipe:
         win.blit(self.PIPE_Bottom, (self.x,self.bottom))
         win.blit(self.PIPE_MIDDLE, (self.x,self.middle_up))
         Star_x = self.x
-        if(self.r == 1):
+        if(self.r == 'up'):
             Star_y = (self.middle_up - 100)
         else:
             Star_y = (self.bottom + self.middle_down - 60)//2
